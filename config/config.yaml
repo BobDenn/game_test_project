@@ -1,0 +1,15 @@
+# 设备和应用配置
+device:
+  platformName: Android
+  platformVersion: "12"
+  deviceName: MuMu12
+  noReset: True
+  
+app:
+  appPackage: com.your.game.package
+  appActivity: com.your.game.MainActivity
+  
+# Appium服务器配置
+server:
+  host: 127.0.0.1
+  port: 4723
