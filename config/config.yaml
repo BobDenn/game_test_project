@@ -4,10 +4,11 @@ device:
   platformVersion: "12"
   deviceName: MuMu12
   noReset: True
+  automationName: UiAutomator2
   
 app:
-  appPackage: com.your.game.package
-  appActivity: com.your.game.MainActivity
+  appPackage: com.game.sanguo
+  appActivity: com.cocos.game.AppActivity
   
 # Appium服务器配置
 server:

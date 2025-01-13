@@ -12,4 +12,6 @@ def get_desired_caps():
     desired_caps.update(data['device'])
     desired_caps.update(data['app'])
     
+    desired_caps['automationName'] = 'UiAutomator2'
+    
     return desired_caps
