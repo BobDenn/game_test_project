@@ -32,8 +32,7 @@ class TestEnvironment(unittest.TestCase):
             # 验证包名
             current_package = driver.current_package
             print(f"当前包名: {current_package}")
-            self.assertEqual(current_package, desired_caps['appPackage'], 
-                            "包名应该匹配")
+            self.assertEqual(current_package, desired_caps['appPackage'], "包名应该匹配")
             
             # 获取页面源代码
             page_source = driver.page_source

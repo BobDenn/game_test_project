@@ -1,0 +1,11 @@
+# 3200x1440分辨率
+default:
+  account_input:
+    x: 1266
+    y: 628
+  password_input:
+    x: 1271
+    y: 842
+  confirm_button:
+    x: 1585
+    y: 995 

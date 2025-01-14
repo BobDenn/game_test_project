@@ -1,3 +1,4 @@
+import unittest
 import pytest
 import time
 import os
@@ -5,7 +6,7 @@ import os
 def run_tests():
     # 获取测试用例目录
     test_dir = os.path.join(os.path.dirname(__file__), 'test_cases')
-    
+    suite = unittest.defaultTestLoader.discover(test_dir, pattern='test_*.py')
     # 创建报告目录
     report_dir = os.path.join(os.path.dirname(__file__), 'reports', 'html_reports')
     if not os.path.exists(report_dir):
