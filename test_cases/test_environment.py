@@ -5,45 +5,45 @@ from appium.options.android import UiAutomator2Options
 
 class TestEnvironment(unittest.TestCase):
     def test_environment_setup(self):
-        """Test if the environment is configured correctly"""
+        """测试环境是否正确配置"""
         try:
-            # Get configuration
+            # 获取配置
             desired_caps = get_desired_caps()
-            print("Desired Capabilities:", desired_caps)
+            print("期望的配置参数:", desired_caps)
             
-            # Create UiAutomator2Options object
+            # 创建 UiAutomator2Options 对象
             options = UiAutomator2Options()
             for key, value in desired_caps.items():
                 options.set_capability(key, value)
-            print("Options set successfully")
+            print("配置参数设置成功")
             
-            # Connect to Appium server
+            # 连接 Appium 服务器
             server_url = 'http://127.0.0.1:4723/wd/hub'
-            print(f"Connecting to Appium server at: {server_url}")
+            print(f"正在连接 Appium 服务器: {server_url}")
             driver = webdriver.Remote(server_url, options=options)
             
-            print("Connected to Appium server successfully")
+            print("成功连接到 Appium 服务器")
             
-            # Get and verify current activity
+            # 获取并验证当前活动页面
             current_activity = driver.current_activity
-            print(f"Current Activity: {current_activity}")
-            self.assertIsNotNone(current_activity, "Activity should not be None")
+            print(f"当前活动页面: {current_activity}")
+            self.assertIsNotNone(current_activity, "活动页面不应为空")
             
-            # Verify package name
+            # 验证包名
             current_package = driver.current_package
-            print(f"Current Package: {current_package}")
+            print(f"当前包名: {current_package}")
             self.assertEqual(current_package, desired_caps['appPackage'], 
-                            "Package name should match")
+                            "包名应该匹配")
             
-            # Get page source
+            # 获取页面源代码
             page_source = driver.page_source
-            self.assertIsNotNone(page_source, "Page source should not be None")
-            print("Page source retrieved successfully")
+            self.assertIsNotNone(page_source, "页面源代码不应为空")
+            print("成功获取页面源代码")
             
-            # Close driver
+            # 关闭驱动
             driver.quit()
-            print("Driver closed successfully")
+            print("驱动已成功关闭")
             
         except Exception as e:
-            print(f"Error details: {str(e)}")
-            self.fail(f"Environment configuration error: {str(e)}") 
+            print(f"错误详情: {str(e)}")
+            self.fail(f"环境配置错误: {str(e)}") 
