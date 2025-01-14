@@ -35,4 +35,12 @@ class TestLogin(unittest.TestCase):
             self.fail(f"登录页面测试失败: {str(e)}")
 
 if __name__ == '__main__':
-    unittest.main()
+    suite = unittest.TestSuite()
+    test_cases = [
+        TestLogin('test_login_page')
+        #TestLogin('other_test_method')
+    ]
+    suite.addTests(test_cases)
+    runner = unittest.TextTestRunner()
+    runner.run(suite)
+
