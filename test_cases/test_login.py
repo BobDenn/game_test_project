@@ -6,6 +6,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from appium.options.android import UiAutomator2Options
 from common.utils import load_test_data
 import time
+import os
 
 class TestLogin(unittest.TestCase):
     @classmethod
@@ -27,20 +28,32 @@ class TestLogin(unittest.TestCase):
         """测试后清理"""
         if self.driver:
             self.driver.quit()
-    
+
     def test_login_success(self):
-        """测试登录成功"""
-        # 从测试数据文件中获取账号密码
-        account = self.test_data['login']['account']
-        password = self.test_data['login']['password']
-        
-        self.login_page.login(account, password)
-        time.sleep(2)  # 等待登录响应
-        
+        """测试登录功能"""
+        try:
+            time.sleep(10)
+            template_image_path = "test_data/screenshots/login.png"
+            self.assertTrue(self.login_page.wait_for_screen(template_image_path, timeout=15), "登录页面未成功加载！")
+
+            account = self.test_data['login']['account']
+            password = self.test_data['login']['password']
+            self.login_page.login(account, password)
+
+            time.sleep(25)  # 等待登录成功
+
+            template_image_path = "test_data/screenshots/login_success.png"
+            self.assertTrue(self.login_page.assert_login_success(template_image_path), "登录成功界面未匹配到，登录失败！")
+
+            screenshot_path = "test_data/screenshots/current_screen.png"
+            os.remove(screenshot_path)
+        except Exception as e:
+            self.login_page.capture_screenshot("login_failure")  # 如果出错，保存截图
+            raise e    
+    
 
 if __name__ == '__main__':
     # 单元测试
-    suite = unittest.TestLoader()
-    suite.loadTestsFromTestCase(TestLogin)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestLogin)
     runner = unittest.TextTestRunner()
     runner.run(suite)

@@ -1,6 +1,8 @@
 appium-python-client
 selenium
 PyYAML
-HTMLTestRunner-Python3
 pytest
 pytest-html
+unittest
+opencv-python
+pytesseract

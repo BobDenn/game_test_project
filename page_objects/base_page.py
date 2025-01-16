@@ -1,3 +1,4 @@
+from datetime import datetime
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -51,16 +52,18 @@ class BasePage:
         element.send_keys(text)
         self.logger.info(f"输入文本: {text} 到元素: {locator}")
     
-    def take_screenshot(self):
-        """截图并保存"""
-        screenshot_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 
-                                    'reports', 'screenshots')
-        if not os.path.exists(screenshot_dir):
-            os.makedirs(screenshot_dir)
+    def capture_screenshot(self, test_name):
+        """保存截图到 reports/screenshots/"""
+        screenshot_dir = os.path.join(os.path.dirname(__file__), 'reports', 'screenshots')
+        os.makedirs(screenshot_dir, exist_ok=True)  # 如果目录不存在则创建
         
-        screenshot_path = os.path.join(screenshot_dir, f'screenshot_{int(time.time())}.png')
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        screenshot_filename = f"{test_name}_{timestamp}.png"
+
+        screenshot_path = os.path.join(screenshot_dir, screenshot_filename)
         self.driver.get_screenshot_as_file(screenshot_path)
-        self.logger.info(f"截图保存在: {screenshot_path}")
+        print(f"截图保存到: {screenshot_path}")
+
     
     def get_scaled_coords(self, x, y):
         """按比例缩放坐标"""
