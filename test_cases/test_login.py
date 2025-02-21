@@ -53,7 +53,7 @@ class TestLogin(unittest.TestCase):
     
 
 if __name__ == '__main__':
-    # 单元测试
+    
     suite = unittest.TestLoader().loadTestsFromTestCase(TestLogin)
     runner = unittest.TextTestRunner()
     runner.run(suite)
